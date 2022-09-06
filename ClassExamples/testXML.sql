@@ -1,0 +1,21 @@
+CREATE DATABASE testXML;
+USE testXML;
+CREATE TABLE Person (
+person_id INT NOT NULL PRIMARY KEY,
+fName varchar(30) NULL,
+lName varchar(30) NULL,
+created TIMESTAMP 
+);
+-- LOAD DATA FROM XML
+LOAD XML LOCAL infile 'C:/Temp/Person.xml'
+INTO TABLE Person
+ROWS IDENTIFIED BY '<Person>';
+-- ADMIN RIGHTS
+SHOW GLOBAL VARIABLES LIKE 'local_infile'; --  IS OFF
+-- TURN ON
+SET GLOBAL local_infile = true; -- ON
+SET GLOBAL local_infile = FALSE; -- TURN OFF
+-- SECOND ADJUSTMENT
+-- OPT_LOCAL_INFILE = 1      MANAGE DATABASE CONNECTION
+-- TEST DATA
+SELECT * FROM person;
